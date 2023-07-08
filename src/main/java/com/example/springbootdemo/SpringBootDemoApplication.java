@@ -26,9 +26,9 @@ public class SpringBootDemoApplication implements CommandLineRunner {
     boolean isValid = validationService.isValidPassword(password);
 
     if (isValid) {
-      System.out.println("Password is valid.");
+      System.out.println("Password "+args[0]+" is valid.");
     } else {
-      System.out.println("Password is invalid.");
+      System.out.println("Password "+args[0]+" is invalid.");
     }
 
   }
