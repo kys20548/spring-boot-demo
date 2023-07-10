@@ -1,4 +1,6 @@
 package com.example.springbootdemo;
+import com.example.springbootdemo.service.PasswordValidationService;
+import com.example.springbootdemo.vo.ValidationResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,14 @@ public class PasswordValidationServiceIntegrationTest {
   @Test
   public void testValidPassword() {
     String password = "abc123";
-    boolean isValid = validationService.isValidPassword(password);
-    Assertions.assertTrue(isValid);
+    ValidationResult isValid = validationService.isValidPassword(password);
+    Assertions.assertTrue(isValid.isSuccess());
   }
 
   @Test
   public void testInvalidPassword() {
     String password = "abc";
-    boolean isValid = validationService.isValidPassword(password);
-    Assertions.assertFalse(isValid);
+    ValidationResult isValid = validationService.isValidPassword(password);
+    Assertions.assertFalse(isValid.isSuccess());
   }
 }

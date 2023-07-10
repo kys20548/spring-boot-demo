@@ -1,5 +1,10 @@
 package com.example.springbootdemo;
 
+import com.example.springbootdemo.dao.impl.LengthRule;
+import com.example.springbootdemo.dao.impl.LowercaseAndDigitRule;
+import com.example.springbootdemo.dao.impl.NoRepeatingSequenceRule;
+import com.example.springbootdemo.service.PasswordValidationService;
+import com.example.springbootdemo.vo.ValidationResult;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +35,8 @@ class PasswordValidationServiceTest2 {
         "pasword123"
     })
     public void testValidPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertTrue(isValid);
+      ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertTrue(result.isSuccess());
     }
   }
 
@@ -48,8 +53,8 @@ class PasswordValidationServiceTest2 {
         "aBcDeF"
     })
     public void testInvalidPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertFalse(isValid);
+       ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertFalse(result.isSuccess());
     }
   }
 
@@ -64,8 +69,8 @@ class PasswordValidationServiceTest2 {
         "ABCDEFGHIJKL"
     })
     public void testBoundaryPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertFalse(isValid);
+       ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertFalse(result.isSuccess());
     }
 
     @ParameterizedTest
@@ -79,8 +84,8 @@ class PasswordValidationServiceTest2 {
         "abc123456789",
     })
     public void testValidBoundaryPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertTrue(isValid);
+      ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertTrue(result.isSuccess());
     }
   }
 
@@ -97,8 +102,8 @@ class PasswordValidationServiceTest2 {
         "abc*123"
     })
     public void testSpecialCharacterPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertFalse(isValid);
+       ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertFalse(result.isSuccess());
     }
   }
 
@@ -114,8 +119,8 @@ class PasswordValidationServiceTest2 {
         "abccba123"
     })
     public void testRepeatedCharacterPasswords(String password) {
-      boolean isValid = validationService.isValidPassword(password);
-      Assertions.assertFalse(isValid);
+       ValidationResult result = validationService.isValidPassword(password);
+      Assertions.assertFalse(result.isSuccess());
     }
   }
 }
