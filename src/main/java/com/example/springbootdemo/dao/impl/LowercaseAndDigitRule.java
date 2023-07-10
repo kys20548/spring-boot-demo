@@ -16,6 +16,6 @@ public class LowercaseAndDigitRule implements PasswordValidationRule {
 
   @Override
   public String invalidMessage() {
-    return "Password must contain at least one lowercase letter.";
+    return "Password must consist of lowercase letters and numerical digits only, with at least one of each";
   }
 }
